@@ -8,6 +8,22 @@ export const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
   },
+  page: {
+    flex: 1,
+    backgroundColor: "#f1f5f9",
+    padding: 16,
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+  errorText: {
+    color: "#dc2626",
+    fontSize: 16,
+    textAlign: "center",
+  },
   title: {
     fontSize: 28,
     fontWeight: "bold",

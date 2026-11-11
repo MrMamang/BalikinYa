@@ -11,3 +11,17 @@ export interface Pinjaman {
   status: StatusPinjam;
   catatan?: string; // opsional
 }
+
+// Interface: bentuk satu kontak dari API
+export interface Kontak {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
+
+// Interface: bentuk response API (isinya array Kontak)
+export interface KontakResponse {
+  users: Kontak[];
+  total: number;
+}
