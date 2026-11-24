@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import { styles } from "../constants/styles";
 import { Pinjaman, StatusPinjam } from "../types/pinjaman";
 import { getPinjaman } from "../services/pinjamanService";
+import { useAuth } from "../context/AuthContext";
 
 const daftarStatus: StatusPinjam[] = ["dipinjam", "kembali", "telat"];
 
@@ -15,6 +16,7 @@ const warnaStatus = (status: StatusPinjam): string => {
 
 export default function Index() {
   const router = useRouter();
+  const { user } = useAuth();
   const [dataPinjaman, setDataPinjaman] = useState<Pinjaman[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -52,9 +54,16 @@ export default function Index() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: 16 }]}>
       <Text style={styles.title}>BalikinYa</Text>
-      <Text style={styles.subtitle}>Catat barangmu yang dipinjam teman</Text>
+      <Text style={[styles.subtitle, { marginBottom: 4 }]}>
+        Catat barangmu yang dipinjam teman
+      </Text>
+      {user && (
+        <Text style={[styles.info, { marginBottom: 14 }]}>
+          Login sebagai: {user.user_metadata?.nama || user.email}
+        </Text>
+      )}
 
       <View style={styles.summaryRow}>
         {daftarStatus.map((status) => (

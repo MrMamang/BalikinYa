@@ -17,6 +17,7 @@ export default function Login() {
   const [isRegistering, setIsRegistering] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [pesan, setPesan] = useState<string>("");
+  const [sukses, setSukses] = useState<string>("");
 
   const handleAuth = async () => {
     if (loading) return; // cegah submit ganda
@@ -30,9 +31,12 @@ export default function Login() {
     }
     setLoading(true);
     setPesan("");
+    setSukses("");
     try {
       if (isRegistering) {
         await daftar(email, password, nama);
+        setSukses("Pendaftaran berhasil! Silakan masuk.");
+        setIsRegistering(false);
       } else {
         await masuk(email, password);
       }
@@ -84,6 +88,12 @@ export default function Login() {
           <Text style={[styles.errorText, { marginTop: 10 }]}>{pesan}</Text>
         )}
 
+        {sukses !== "" && (
+          <Text style={{ color: "#16a34a", fontSize: 14, textAlign: "center", marginTop: 10 }}>
+            {sukses}
+          </Text>
+        )}
+
         <Pressable
           style={[styles.button, loading && { opacity: 0.6 }]}
           onPress={handleAuth}
@@ -102,6 +112,7 @@ export default function Login() {
           onPress={() => {
             setIsRegistering(!isRegistering);
             setPesan("");
+            setSukses("");
           }}
         >
           <Text style={local.link}>
